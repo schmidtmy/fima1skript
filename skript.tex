@@ -1,0 +1,207 @@
+\documentclass[envcountsame,envcountchap,envcountsect,amsart]{svmono}
+\sffamily
+
+
+\usepackage{stmaryrd}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{fontenc}
+\usepackage{dsfont}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\setlength\parindent{0pt}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage[ngerman]{babel}
+\usepackage{bbm}
+\usepackage{fancybox}
+\usepackage[latin1]{inputenc}
+\usepackage{latexsym}
+\usepackage{makeidx}
+
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{bem}[thm]{Bemerkung}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{bei}[thm]{Beispiel}
+\newtheorem{koro}[thm]{Korollar}
+
+\usepackage{dsfont,amsmath,amssymb}
+\allowdisplaybreaks
+\makeindex
+\smartqed
+\usepackage[numbers]{natbib}
+\bibliographystyle{chicago} % protter (2003)
+\bibliographystyle{plain}   % protter [2003]
+\bibliographystyle{plainnat} % [8] -> hier tauchen die Nummern in References auf
+%\begin{itemize}
+%\item[-]
+% Normale: $ x^2 + 2xy + y^2 $\\
+% Mit displaystyle: $ {\displaystyle x^2 + 2xy + y^2} $\\
+% Mit scriptstyle: $ {\scriptstyle x^2 + 2xy + y^2} $\\
+% Mit scriptscriptstyle: $ {\scriptscriptstyle x^2 + 2xy + y^2} $\\
+% Mit textstyle: $ {\textstyle x^2 + 2xy + y^2} $\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\author{Thilo Mayer-Brandis}
+\title{Finanzmathematik 1}
+\date{WS 2011/12}
+\maketitle
+\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\printindex
+\part{Modelle in einer Periode}
+%\chapter{Einleitung}
+\chapter{Arbitragetheorie mit deterministischen Anfangspreisen}
+\section{Grundlagen und FTAP}
+
+Marktmodell (Einperiodenmodell):
+\begin{itemize}
+	\item $d+1$ Wertpapiere (Assets)
+	\item Zwei Zeitpunkte: $t=0$ "`heute"' und $t=1$  "`Zukunft"'
+\end{itemize}
+Zum Zeitpunkt $t=0$ sind die Preise (z.B. in EUR) der Wertpapiere bekannt: $\pi^i\geq 0$ fr $i=1,...,d$\vspace*{.1cm}\\
+Zum Zeitpunkt $t=1$ ist die Kursentwicklung/Preise unsicher. Diese zuknftigen Kurse modellieren wir als Zufallsvariablen (ZV) auf einem geeigneten Wahrscheinlichkeitsraum (W'Raum) $\left(\Omega,\mathcal{F},\mathbb{P}\right)$:
+\begin{center}
+$S^i:\Omega\rightarrow [0,\infty)$, mit $i=0,1,...,d$
+\end{center}
+$S^i\left(\omega\right)$ ist dann der Preis des $i$-ten Assets zum Zeitpunkt $t=1$ mit gegebenem Szenario $\omega\in \Omega$\vspace*{.2cm}\\
+Bond (Bankkonto): Wir setzen
+\begin{center}
+$\pi^0=1,\ S^0=S^0\left(\omega\right)=1+r,$ wobei $r>-1$
+\end{center}
+Dabei modelliert $r$ den Zinssatz, welcher in unserem Fall (Finanzmathematik I und II) stets deterministisch ist, das heit, er entwickelt sich nicht mit der Zeit.\vspace*{.1cm}\\
+$S^0$ wird auch als "`riskless Asset"' und $S^1,...,S^d$ als "`risky Assets"' bezeichnet.\vspace*{.2cm}\\
+\textbf{Notation:}
+\begin{enumerate}
+\item[] $\pi=\left(\pi^1,...,\pi^d\right)\in \mathds{R}^d_+$\vspace*{.1cm}
+\item[] $\bar{\pi}=\left(\pi^0,\pi^1,...,\pi^d\right)\in \mathds{R}^{d+1}_+$\vspace*{.1cm}
+\item[] $ S=\left(S^1,...,S^d\right)$\vspace*{.1cm}\\
+\item[] $\bar{S}=\left(S^0,S^1,...,S^d\right)$\vspace*{.1cm}\\
+$\bar{S}$ gibt zuknftige Preise inklusiv dem Bondpreis an.
+\end{enumerate}
+\textbf{Definition 1.1.} Ein \textit{Portfolio (oder auch Strategie)} ist ein Vektor
+\begin{center}
+$\bar{\xi}=\left(\xi^0,\xi\right)=\left(\xi^0,\xi^1,...,\xi^d\right)\in \mathds{R}^{d+1},$
+\end{center}
+wobei $\xi^i$ die Anzahl des $i$-ten Assets im Portfolio ist (insb. $\xi^0=$ Geld auf dem Bankkonto).
+\begin{itemize}
+	\item Anfangswert (Preis) eines Portfolios/Strategie zur Zeit $t=0$:
+	\begin{center}
+	$V_0=\bar{\xi}\cdot \bar{\pi}=\sum_{i=0}^d{\xi^i\pi^i}$
+	\end{center}
+	\item Endwert desselben Portfolio zur Zeit $t=1$:
+	\begin{center}
+	$V_1=V_1\left(\omega\right)=\bar{\xi}\cdot\bar{S}=\sum_{i=0}^d{\xi^iS^i}$
+	\end{center}
+\end{itemize}
+	\textbf{Bemerkung 1.2.} Folgende Anmerkungen sind impliziert:
+\begin{enumerate}
+	\item[(i)]   $\xi^i<0$ mglich, das heit "`short selling"' ist erlaubt!\vspace*{.1cm}
+	\item[(ii)]  keine Transaktionskosten\vspace*{.1cm}
+	\item[(ii)]  kein Unterschied zwischen Kauf-/Verkaufspreis (kein Bid/Spread)\vspace*{.1cm}
+	\item[(iv)]  Liquiditt: alle Assets in beliebig groer Zahl verfgbar/verkuflich, zudem beliebig stckelbar.
+\end{enumerate}
+\textbf{Notation/Definition 1.3.}
+\begin{enumerate}
+	\item[(i)] Diskontierte Preise: $X^i:=\frac{S^i}{1+r}$, $i=0,...,d$
+	\item[(ii)] Diskontierte Wertvernderung: $Y^i:=X^i-\pi^i=\frac{S^i}{1+r}-\pi^i$, $i=1,...,d$ weiter definieren wir: $Y:=\left(Y^1,...,Y^d\right)$
+\end{enumerate}
+\textbf{Bemerkung 1.4.}
+\begin{itemize}
+	\item Wir betrachten \textit{dikontierte Preise}, um Preise in $t=1$ mit Preisen in $t=0$ vergleichen zu knnenn: $1$ EUR heute ist mehr wert als $1$ EUR zum Zeitpunkt $t=1$. Deshalb betrachten wir Preise nicht in Einheiten "`Whrung"' sondern in der Einheit "`Bond"' (1 Bond heute = 1 Bond in $t=1$) und damit: Diskontierte Preise mit Bond als \textit{Numeraire}
+	\item Alternativ knnte jedes andere strikt positives Wertpapier (bzw. Portfolio) als Numeraire verwendet werden (das heit, alle Preise in Einheiten des Numeraire ausgedrckt).
+	\end{itemize}
+	\textbf{Definition 1.5} Ein Portfolio $\bar{\xi}\in \mathds{R}^{d+1}$ heit \textit{Arbitragestrategie (oder einfach Arbitrage)}, falls
+\begin{enumerate}
+	\item[(i)]$V_0=\bar{\xi}\bar{\pi}\leq 0$ oder\vspace*{.1cm}\\
+	\item[(ii)] $V_1=\bar{\xi}\bar{S}\left(\omega\right)\geq 0$, $\mathbb{P}$-fast sicher und $p\left(\bar{\xi}\bar{S}>0\right)>0$
+\end{enumerate}
+Wir nennen ein Marktmodell $\left(\bar{\pi},\bar{S}\right)$ \textit{arbitrgefrei}, falls es kein Arbitrge zulsst, und notieren dies mit (NA).
+\vspace*{.2cm}\\
+\textbf{Bemerkung 1.6.}
+\begin{itemize}
+	\item Arbitrage entspricht "`risikofreier Gewinn"'\vspace*{.1cm}\\
+	$\rightarrow$ in effiziente Mrkten schwer/nicht realisierbar\vspace*{.1cm}\\
+	$\rightarrow$ (NA) Schlsselannahme in Arbitragetheorie
+	\item (NA) $\Rightarrow$ $S^i=0$ $\mathbb{P}$-fast sicher falls $\pi^i=0$\vspace*{.1cm}\\
+	$\rightarrow$ O.B.d.A $\pi^i>0$ im Folgenden.
+	\item In der Definition von Arbitrage spielt $\mathbb{P}$ nur bei der Festlegung der $0$-Menge eine Rolle\vspace*{.1cm}\\
+	$\rightarrow$ jedes andere zu $\mathbb{P}$ quivalente Wahrscheinlichkeitsma $\mathbb{Q}$ auch ok.
+\end{itemize}
+\textbf{Lemma 1.7.} Es sind quivalent:
+\begin{enumerate}
+	\item[(a)] Es gibt Arbitrage
+	\item[(b)] Es gibt $\bar{\xi}\in \mathds{R}^{d+1}$, so dass $\bar{\xi}\bar{\pi}\leq 0$ und dass $\bar{\xi}\bar{X}\geq 0$ $\mathbb{P}$-fast sicher $\mathbb{P}\left(\bar{\xi}\bar{X}>0\right)>0$.
+	\item[(c)] Es gibt $\xi\in \mathds{R}^d$ mit $\xi Y\geq 0$ $\mathbb{P}$-fast sicher und $\mathbb{P}\left(\xi Y>0\right)>0$, das heit $\xi S\geq^{f.s.}\left(1+r\right)\xi\pi$ und $\mathbb{P}\left(\xi S>\left(1+r\right)\pi\right)>0$
+\end{enumerate}
+\textit{Beweis.} bungsaufgabe.\vspace*{.2cm}\\
+Nun kommen wir zum Hauptsatz des Kapitels und fhren zunchst eine Definition ein:\vspace*{.2cm}\\
+\textbf{Definition 1.8.} Eein Wahrscheinlichkeitsma $\mathbb{P}^*$ auf $\left(\Omega,\mathcal{F}\right)$ heit \textit{risikoneutrales Ma/ Martingalma (MM)}, falls
+\begin{center}
+$\pi^i=\mathbb{E}_{\mathbb{P}^*}\left[\frac{S^i}{1+r}\right]$, fr alle $i=0,...,d$.
+\end{center}
+Wir notieren mit
+\begin{center}
+$\mathcal{P}:=\left\{\mathbb{P}^*|\mathbb{P}^*\approx\mathbb{P},\ \mathbb{P}^*\ ist\ MM\right\}$
+\end{center}
+die Menge der quivalenten Martingalmae (MM)\vspace*{.2cm}\\
+\textbf{Theorem 1.9. (FTAP - Fundamental Theorem of Asset Pricing)} Ein Markt ist arbitragefrei genau dann, wenn
+\begin{center}
+$\mathcal{P}\neq\emptyset$
+\end{center}
+In diesem Fall existiert sogar ein $\mathbb{P}^*\in \mathcal{P}$ mit beschrnkter \textit{Radon-Nikodymdichte} $\frac{d\mathbb{P}^*}{d\mathbb{P}}$\vspace*{.1cm}\\
+\textit{Beweis.} Fangen wir mit der einfacheren Richting, der Rckrichtung an: Sei $\mathbb{P}^*\in \mathcal{P}$ und $\bar{\xi}\in\mathds{R}^{d+1}$ Strategie, so dass $\bar{\xi}\bar{X}\geq 0\ \mathbb{P}$-f.s. und $\mathbb{P}\left(\bar{\xi}\bar{X}>0\right)>0$.\vspace*{.2cm}\\
+$\Longrightarrow 0<\mathbb{E}_{\mathbb{P}^*}\left[\bar{\xi}\bar{X}\right]=\bar{\xi}\mathbb{E}_{\mathbb{P}^*}\left[\bar{X}\right]=^{Def.\ 1.8}\bar{\xi}\bar{\pi}$\vspace*{.2cm}\\
+$\Longrightarrow$ Es existiert keine Arbitrage!\vspace*{.1cm}\\
+Nun die andere Richtung der quivalenz:
+\begin{enumerate}
+\item Wir knnen o.B.d.A annehmen, dass $\mathbb{E}_{\mathbb{P}}\left[|Y|\right]<\infty$ gilt, das heit $\mathbb{E}_{\mathbb{P}}\left[|Y^i|\right]<\infty$ fr alle $i=1,...,d$, denn:\vspace*{.1cm}\\
+Falls $\mathbb{E}\left[|Y|\right]=\infty$ ist, betrachte $\widetilde{\mathbb{P}}$ gegeben durch $\frac{d\widetilde{\mathbb{P}}}{d\mathbb{P}}=\frac{1}{1+||Y||}\cdot c$, wobei $c:=\frac{1}{\mathbb{E}_{\mathbb{P}}\left[\frac{1}{1+||Y||}\right]}$.\vspace*{.1cm}\\
+Es gilt $\mathbb{E}\left[\frac{d\widetilde{\mathbb{P}}}{d\mathbb{P}}\right]=1$ und $\frac{\widetilde{d\mathbb{P}}}{d\mathbb{P}}>0$ und $\frac{d\widetilde{\mathbb{P}}}{d\mathbb{P}}\leq c$\vspace*{.1cm}\\
+$\mathbb{E}_{\widetilde{\mathbb{P}}}\left[||Y||\right]=\mathbb{E}_{\mathbb{P}}\left[\frac{d\widetilde{\mathbb{P}}}{d\mathbb{P}}||Y||\right]=\mathbb{E}_{\mathbb{P}}\left[\frac{1}{1+||Y||}\cdot ||Y||\right]\cdot c\leq c<\infty$\vspace*{.1cm}\\
+Damit folgt mit Bemerkung 1.6: (NA) unter $\mathbb{P}$ genau dann, wenn (NA) unter $\widetilde{\mathbb{P}}$.\vspace*{.1cm}\\
+Angenommen es gibt ein $\mathbb{P}^*\in \widetilde{\mathcal{P}}$ mit beschrnkter Dichte $\frac{d\mathbb{P}^*}{d\widetilde{\mathbb{P}}}$, so ist auch
+\begin{center}
+$\frac{d\mathbb{P}^*}{d\mathbb{P}}=\frac{d\mathbb{P}^*}{d\widetilde{\mathbb{P}}}\frac{d\widetilde{\mathbb{P}}}{d\mathbb{P}}$
+\end{center}
+beschrnkt.\vspace*{.1cm}\\
+\item Sei also $\mathbb{E}_ {\mathbb{P}}\left[||Y||\right]<\infty$. Wir definieren
+\begin{center}
+$\mathcal{Q}:=\left\{\mathbb{Q}\ |\ \mathbb{Q}\ W'mass,\ \mathbb{Q}\approx\mathbb{P},\ \frac{d\mathbb{Q}}{d\mathbb{P}}\ beschr.\right\}$\vspace*{.1cm}\\
+$\mathcal{C}:=\left\{\mathbb{E}_{\mathbb{Q}}\left[Y\right]|\mathbb{Q}\in\mathcal{Q}\right\},$\footnote{Bemerkung: $\mathbb{E}_{\mathbb{Q}}\left[Y^i\right]=\mathbb{E}_{\mathbb{P}}\left[\frac{d\mathbb{Q}}{d\mathbb{P}}Y^i\right]\stackrel{\frac{d\mathbb{Q}}{d\mathbb{P}}\ beschr.\ Dichte}{\leq} c\cdot\mathbb{E}_{\mathbb{P}}\left[|Y^i|\right]<\infty$, wobei $c=const.$ $\Longrightarrow \mathbb{E}_{\mathbb{Q}}\left[Y^i\right]$ wohldefiniert, da $Y$ unter $\mathbb{P}$ integrierbar angenommen wurde.}
+\end{center}
+wobei $\mathbb{E}_{\mathbb{Q}}\left[Y\right]$ gerade der Vektor
+$\mathbb{E}_{\mathbb{Q}}\left[Y\right]:=\left(\mathbb{E}_{\mathbb{Q}}\left[Y^1\right],...,\mathbb{E}_{\mathbb{Q}}\left[Y^d\right]\right)$ ist.\vspace*{.1cm}\\
+Es gilt: Es gibt MM $\mathbb{P}^*\in \mathcal{P}\cap\mathcal{Q}$ genau dann, wenn $0\in\mathcal{C}$.\vspace*{.1cm}\\
+Angenommen $0\notin \mathcal{C}$. Wir bentigen folgenden Satz:\vspace*{.1cm}\\
+\begin{enumerate}
+	\item[] \textit{Theorem (Trennungssatz in endl. Dim.): Sei $B\in \mathds{R}^n$ konvex, $B\neq\oslash$, $0\notin B$. Dann gibt es ein $\eta\in \mathds{R}^n$ mit $\eta\cdot x>0$ fr alle $x\in B$ und $\eta\cdot x^*>0$ fr mindestens ein $x^*\in B$}.\vspace*{.1cm}\\${}$
+\textit{Beweis. Ubung!}
+\end{enumerate}${}$\vspace*{.1cm}\\
+Es gilt offensichtlich $0\in \mathcal{C}$ und $\mathcal{C}\neq\emptyset$. Weiter ist $\mathcal{C}$ konvex, denn:\vspace*{.1cm}\\
+Sei $0\leq \alpha \leq 1$ und $\mathbb{E}_{\mathbb{Q}_1}\left[Y\right],\mathbb{E}_{\mathbb{Q}_2}\left[Y\right]\in\mathcal{C}$.\vspace*{.1cm}\\
+$\Longrightarrow \alpha \mathbb{E}_{\mathbb{Q}_1}\left[Y\right]+\left(1-\alpha\right)\mathbb{E}_{\mathbb{Q}_2}\left[Y\right]=\mathbb{E}_{\mathbb{Q}_{\alpha}}\left[Y\right]$, mit $\mathbb{Q}_{\alpha}=\alpha\mathbb{Q}_1+\left(1-\alpha\right)\mathbb{Q}_2\in\mathcal{Q}$. Das heit, $\mathcal{C}$ ist konvex.\vspace*{.1cm}\\
+Nach dem Trennungssatz folgt nun: Es gibt ein $\xi\in \mathds{R}^n$ mit\vspace*{.2cm}\\
+$\left(*\right)\ \ \ \ \xi\cdot\mathbb{E}_{\mathbb{Q}}\left[Y\right]\geq 0$ fr alle $\mathbb{Q}\in\mathcal{Q}$\vspace*{.1cm}\\
+$\left(**\right)\ \ \ \xi\cdot\mathbb{E}_{\mathbb{Q}}^0\left[Y\right]> 0$ fr mindestens ein $\mathbb{Q}^0\in\mathcal{Q}$\vspace*{.2cm}\\
+Aus $\left(**\right)$ folgt $\mathbb{Q}^0\left(\xi\cdot Y>0\right)>0$.\vspace*{.1cm}\\
+$\stackrel{\mathbb{P}\ \approx\ \mathbb{Q}^0}\Longrightarrow \mathbb{P}\left(\xi Y>0\right)>0$\vspace*{.1cm}\\
+Bleibt also nur noch zu zeigen: $\xi\cdot Y\geq 0$ $\mathbb{P}$-fast sicher.\vspace*{.1cm}\\
+Dazu definieren wir $\phi_n:=\left(1-\frac{1}{n}\right)\mathds{1}_A+\frac{1}{n}\mathds{1}_{A^C}$ mit $A:=\left\{\xi Y< 0\right\}$ und Wahrscheinlichkeitsmae $\mathbb{Q}^n\approx\mathbb{P}$ durch
+\begin{center}
+$\frac{d\mathbb{Q}^n}{d\mathbb{P}}=\frac{\phi_n}{\mathbb{E}_{\mathbb{P}}\left[\phi_n\right]}$
+\end{center}
+Dann gilt: $0< \frac{d\mathbb{Q}^n}{d\mathbb{P}}\leq 1\Longrightarrow \mathbb{Q}^n\in\mathcal{Q}$\vspace*{.1cm}\\
+$\stackrel{\left(*\right)}\Longrightarrow \xi\mathbb{E}_{\mathbb{Q}^n}\left[Y\right]=\mathbb{E}_{\mathbb{Q}^n}\left[\xi\cdot Y\right]=\frac{\mathbb{E}_{\mathbb{P}}\left[\xi\cdot Y\cdot \phi_n\right]}{\mathbb{E}_{\mathbb{P}}\left[ \phi_n\right]}$
+\vspace*{.1cm}\\
+$\Longrightarrow lim_{n\rightarrow\infty}\mathbb{E}_{\mathbb{P}}\left[\xi Y\cdot\phi_n\right]\stackrel{dom.\ Konv.}{=}\mathbb{E}_{\mathbb{P}}\left[\xi\cdot Y\cdot lim_{n\rightarrow\infty}\phi_n\right]=$\vspace*{.1cm}\\
+$\mathbb{E}_{\mathbb{P}}\left[\xi\cdot Y\cdot\mathds{1}_A\right]\geq 0$\vspace*{.1cm}\\
+$\Longrightarrow \mathbb{P}\left(A\right)=0$ und somit $\xi Y\geq 0$ $\mathbb{P}$-fast sicher.\vspace*{.1cm}\\
+Damit folgt mit Lemma 1.7: $\xi$ liefert Arbitrage und damit einen Widerspruch.\vspace*{.1cm}\\
+$\Rightarrow 0\in\mathcal{C}$
+\end{enumerate}
+%\end{proof}
+\end{document} 
