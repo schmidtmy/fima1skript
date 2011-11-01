@@ -1,0 +1,161 @@
+\section{Grundlagen der Wahrscheinlichkeitstheorie}\label{ueb1}
+\subsection{Der Wahrscheinlichkeitsraum}
+Gegeben sei ein beliebiger Grund-/Ereignisraum $ \Omega $.
+\begin{Def}
+$\mathcal F\subseteq \mathcal{P}(\Omega)$ ist eine \underline{$ \sigma $-Algebra}, wenn gilt:
+\begin{itemize}
+\item $ \Omega\in\mathcal F $
+\item $ A\in\mathcal F\Longrightarrow A^{c}\in\mathcal F $
+\item $ A_{1},A_{2},\hdots\in\mathcal F $ (abzählbar) $ \Longrightarrow \bigcup\limits_{i\in\mathbb N} A_{i} \in\mathcal F$
+\end{itemize}
+Das Paar $ (\Omega,\mathcal F) $ heißt \underline{Maßraum}
+\end{Def}
+\begin{Def}
+Ein \underline{Maß} ist eine Abbildung $ \mu:\mathcal{F}\to\mathbb R^{+} $, die folgende Bedingungen erfüllt:
+\begin{itemize}
+\item[i)] $ \mu(\emptyset)=0 $
+\item[ii)] $ \mu(\bigcup\limits_{i=1}^{\infty}A_{i})=\sum\limits_{i=1}^{\infty}\mu(A_{i})  $ für alle Folgen $ A_{1},A_{2},\hdots $ disjunkte Mengen aus $ \mathcal F $
+\end{itemize}
+Ein Maß heißt \underline{Wahrscheinlichkeitsmaß}, falls zusätzlich gilt:
+\begin{itemize}
+\item[iii)] $ \mu(\Omega)=1 $
+\end{itemize}
+Das Tripel $ (\Omega,\mathcal F,\mathbb P) $ heißt \underline{Wahrscheinlichkeitsraum}.
+\end{Def}
+\begin{Def}
+Sei $ (\Omega',\mathcal F') $ ein weiterer Messraum. Eine Abbildung $ X:\Omega\to\Omega' $ heißt \underline{messbar} bzw. eine Zufallsvariable, falls $ \forall \ A\in\mathcal F' $ gilt:
+\begin{equation*}
+X^{-1}(A)=\{ \omega\in\Omega: X(\omega)\in A \} \in\mathcal F
+\end{equation*}
+Wir schreiben $ X:(\Omega,\mathcal F)\to (\Omega',\mathcal F') $
+\end{Def}
+\begin{Def}
+Sei $ X:(\Omega,\mathcal F,\mathbb P)\to (\Omega',\mathcal F') $ eine Zufallsvariable, dann wird durch
+\[ \mathbb P_{X}(A):=\mathbb{P}(\underbrace{X^{-1}(A)}_{\in\mathcal F}) \ \ ,A\in\mathcal F' \]
+ein Maß auf $ \mathcal F' $ definiert, die sogenannte Verteilung von $ X $ unter $ \mathbb{P} $
+\end{Def}
+\subsection{Unabhängigkeit}
+\begin{Def}
+Sei $ (\Omega,\mathcal F,\mathbb P) $ ein Wahrscheinlichkeitsraum
+\begin{itemize}
+\item[i)] Zwei Ereignisse $ A_{1},A_{2}\in\mathcal F $ heißen \underline{unabhängig}, falls $ \mathbb P(A_{1}\cap A_{2})=\mathbb P(A_{1})\mathbb{P}(A_{2}) $
+\item[ii)] Eine Familie $ (A_{i})_{i\in\mathbb I} $ von Ereignissen $ A_{i}\in\mathcal F $ heißt (stoch.) \underline{unabhängig}, falls für alle $ J\subseteq I , J$ endlich gilt: 
+\[ \mathbb{P}(\bigcap\limits_{j\in J} A_{j})=\prod\limits_{j\in J} \mathbb{P}(A_{j}) \]
+\item[iii)] Zwei Ereignisse $ A_{i},A_{j}\in\mathcal F $ einer Familie $ (A_{i})_{i\in I} $ heißen \underline{paarweise unabhängig}, falls $ \mathbb{P}(A_{j}\cap A_{i})=\mathbb{P}(A_{j})\mathbb{P}(A_{i}) $
+\end{itemize}
+\underline{ACHTUNG:} Die paarweise Unabhängigkeit \underline{aller} $ A_{i},A_{j} $ einer Familie $ (A_{i})_{i\in I} $ von Ereignissen impliziert \underline{NICHT} deren stochastische Unabhängigkeit!
+\end{Def}
+\subsection{Der Satz von Radon-Nykodym, Dichten}
+\begin{Def}
+Seien $ \mathbb{P} $ und $ \mathbb{Q} $ zwei Maße auf \underline{der selben} $ \sigma $-Algebra $ \mathcal{F} $.
+\begin{itemize}
+\item $ \mathbb{Q} $ ist \underline{absolut stetig} bzgl. $ \mathbb{P} $, in Zeichen $ \mathbb{Q}<<\mathbb{P} $, falls gilt:
+\[ \forall \ A\in\mathcal F : \mathbb{P}(A)=0\Longrightarrow \mathbb{Q}(A)=0 \]
+\item $ \mathbb{P} $ und $ \mathbb{Q} $ sind \underline{äquivalent}, in Zeichen $ \mathbb{P}\approx\mathbb Q $, wenn gilt:
+\[ \mathbb{Q}<<\mathbb{P} \text{ und } \mathbb{Q}>>\mathbb{P} \]
+\end{itemize}
+\end{Def}
+\begin{Def}
+Ist $ f:(\Omega,\mathcal F)\to(\overline{\mathbb R^{+}},\mathcal{B}(\overline{\mathbb R^{+}})) $ eine nicht-negative numerische Zufallsvariable, so heißt
+\[ \mathbb{Q}(A)=\int\limits_{A}fd\mathbb P \]
+das Maß mit der Dichte $ f $ bzgl. $ \mathbb{P} $. \\
+Wir schreiben $ f=\frac{d\mathbb Q}{d\mathbb P} $
+\end{Def}
+\begin{hwork}
+Zeige: $ \mathbb{Q} $  ist tatsächlich ein Maß auf $ \mathcal{F} $! \\
+Gegeben $ \mathbb{P} $ und $ \mathbb{Q} $ (beliebig). Exisitert die Dichte $ \frac{d\mathbb Q}{d\mathbb P} $?
+\end{hwork}
+\begin{theorem}[Satz von Radon-Nykodym]
+Seien $ \mathbb{P} $ und $ \mathbb{Q} $ zwei Maße auf $ \mathcal{F} $ in einer Menge $ \Omega $. Ist $ \mathbb{P} \sigma$-endlich, d.h. es existiert eine Folge $ (A_{n})_{n\in\mathbb N} \in\mathcal F$ mit $ \bigcup\limits_{i\in\mathbb N} A_{i}=\Omega $ und $ \mathbb{P}(A_{i})<\infty \ \forall \ i\in\mathbb N$, dann sind die folgenden Aussagen äquivalent:
+\begin{itemize}
+\item[i)] $ \mathbb{Q} $ besitzt Dichte bzgl. $ \mathbb{P} $
+\item[ii)] $ \mathbb{Q} $ ist absolut stetig bzgl. $ \mathbb{P} $
+\end{itemize}
+\end{theorem}
+\begin{rem}
+\begin{enumerate}
+\item[]
+\item[1.] Nach Definition ist $ \frac{d\mathbb Q}{d\mathbb P}\geq 0 $
+\begin{hwork} $ \frac{d\mathbb Q}{d\mathbb P}>0 \text{ f.s.} \Longrightarrow \mathbb{P}\approx \mathbb{Q} $
+\end{hwork}
+\item[2.] Jedes Wahrscheinlichkeitsmaß $ \mathbb{P} $ ist $ \sigma $-endlich.
+\end{enumerate}
+\end{rem}
+\begin{ex}
+\begin{itemize}
+\item[]
+\item[1.] Sei $ \lambda $ das Lebesgue-Maß auf $ (\mathbb R,\mathcal B(\mathbb R)) $
+\begin{enumerate}
+\item[i)] Die Dichte \[ \Phi_{\mu,0}(x)=\frac{d\Phi}{d\lambda}=\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}} },\mu\in\mathbb R,\sigma>0 \] definiert ein Wahrscheinlichkeitsmaß auf ($ \mathbb R,\mathcal B(\mathbb R) $), die sogenannte Normalverteilung $ \mathcal N(\mu,\sigma^{2}) $ mit Erwartungswert $ \mu $ und Varianz $ \sigma^{2} $.
+\item[ii)] Die Dichte
+\[ \gamma_{p,b}(x)=\frac{d\gamma}{d\lambda}(x):=\left\lbrace\begin{array}{lr} \frac{b^{p}}{\Gamma (p)}x^{p-1}e^{-bx} & x\geq 0 \\ 0 & x <0  \end{array}\right.  \ \text{ wobei } \Gamma(p)=\int\limits_{0}^{\infty}t^{p-1}e^{-t}dt  \]
+definiert ein Wahrscheinlichkeitsmaß auf $ (\mathbb R,\mathcal B(\mathbb R)) $ bzw. $ (\mathbb R^{+},\mathcal B(\mathbb R^{+})) $, die sogenannte Gammaverteilung. \\
+\underline{Spezialfall:} \[ \gamma_{1,b}(x)=\left\lbrace\begin{array}{lr} be^{-bx} & x\geq 0 \\ 0 & x <0  \end{array}\right.  \]
+definiert die Exponentialverteilung Exp($ b $).
+\item[iii)] \[ \beta_{p,q}^{[a,b]}(x)=\frac{d\beta}{d\lambda}=\frac{1}{B(a,b,p,q)}(x-a)^{p-1}(b-x)^{q-1}\mathbbm{1}_{[a,b]}(x) \]
+definiert ein Wahrscheinlichkeitsmaß auf $ ([a,b],\mathcal B([a,b])) $, die sogenannte Betaverteilung
+\end{enumerate}
+\begin{rem}
+\begin{enumerate}
+\item[]
+\item[-1-] Da das Lebesgue-Maß $ \lambda \ \sigma$-endlich ist, sind alle so definierten Wahrscheinlichkeitsmaße absolut stetig bzgl. $ \lambda $ (Radon-Nykodym).
+\item[-2-] Sei $ X:(\Omega,\mathcal F,\mathbb P)\to(\Omega',\mathcal F') $ eine Zufallsvariable mit $ \mathbb{P}_{X}<<\mu $. Sei außerdem $ g:(\Omega',\mathcal F')\to(\mathbb R,\mathcal B(\mathbb R)) $ eine messbare Abbildung, so dass $ g(X)\in\mathcal L^{1}(\Omega,\mathcal F,\mathbb P) $, dann kann der Erwartungwert von $ g(X) , E[g(X)]$ berechnet werden als
+\[ E[g(X)]=\lim\limits_{\mathbb R}g(x)\frac{d\mathbb P_{X}}{d\mu}(x)\mu(dx) \]
+\begin{ex}
+$ X\sim\mathcal N(0,1) \ , \mathbb P_{X}=\mathcal N(0,1) \ , X:(\Omega,\mathcal F,\mathbb P)\to(\mathbb R,\mathcal B(\mathbb R)) $
+\[ \Longrightarrow E[X^{2}]=\frac{1}{\sqrt{2\pi}} \int\limits_{\mathbb R} x^{2}e^{-\frac{x^{2}}{2} }\lambda(dx)=\frac{1}{\sqrt{2\pi}}\int\limits_{\mathbb R} x^{2}e^{-\frac{x^{2}}{2} }dx=1 \]
+\end{ex}
+\end{enumerate}
+\end{rem}
+\item[2.] Sei $ \mathbb{P} $ ein Wahrscheinlichkeitsmaß auf $ (\Omega,\mathcal F) $, und $ \phi\in\mathcal L^{1}(\Omega,\mathcal F,\mathbb P) $, d.h. $ E[|\phi|]<\infty $ mit $ \phi>0 $, dann definiert
+\[ \frac{d\mathbb Q}{d\mathbb P}=\frac{\phi}{E[\phi]} \]
+ein zu $ \mathbb P $ äquivalentes Wahrscheinlichkeitsmaß $ \mathbb Q $.
+\item[3.] Sind $ \mathbb P $ und $ \mathbb P $ zwei äquivalente Wahrscheinlichkeitsmaße auf $ (\Omega,\mathcal F) $, wobei $ \mathcal F=\sigma(A_{1},\hdots ,A_{n}) $ mit $ A_{i}\cap A_{j}=\emptyset \ \forall i\neq j $ und $ \mathbb{P}(A_{i})>0 $, sowie $ \Omega=\bigcup\limits_{i=1}^{n}A_{i} $, dann gilt:
+\[ \frac{d\mathbb Q}{d\mathbb P}=\sum\limits_{i=1}^{n}\frac{\mathbb Q(A_{i})}{\mathbb P (A_{i})}\mathbbm 1_{A_{i}} \]
+\begin{hwork}[Beweis]
+Berücksichtigung des folgenden Lemmas:
+\begin{lem}
+$ (\Omega,\mathcal F) $ Messraum, wobei $ F=\sigma(A_{1},\hdots ,A_{n}) $ mit $ A_{i}\cap A_{j}=\emptyset \ \forall i\neq j $ . Dann ist jede $ \mathcal F $-messbare Zufallsvariable auf den Ereignissen $ A_{i} $ konstant, d.h. $ Z=\sum\limits_{i=1}^{n} c_{i}\mathbbm 1_{A_{i}} $
+\end{lem}
+\begin{proof}
+Angenommen $ Z $ habe 2 Werte $ a,b \ ,a\neq b$ auf $ A_{i} $, dann wäre $ A:=\{ Z=a,A_{i} \}=\underbrace{Z^{-1}(\{a\})}_{\in\mathcal F}\cap \underbrace{A_{i}}_{\in\mathcal F} \in\mathcal F $.
+Allerdings gilt $ \emptyset\subsetneq A\subsetneq A_{i} $, also kann $ A $ nicht durch $ A_{1},\hdots,A_{n} $ erzeugt sein, also $ A\notin\mathcal F $. Widerspruch.
+\end{proof}
+\end{hwork}
+\end{itemize}
+\end{ex}
+\subsection{Die bedingte Erwartung}
+Oft stehen uns nur Teilinformationen über den Ausgang eines Experimentes (Zufallsvariable) $ X $ zur Verfügung. Der Begriff der bedingten Erwartung versucht eine "möglichst gute"' Approximation an den nicht beobachtbaren Wert $ X(\omega) $ zu finden, wenn nur Teilinformationen über $ \omega\in\Omega $ zur Verfügung stehen.
+\begin{Def}
+Sei $ X\in\mathcal L^{1}(\Omega,\mathcal F,\mathbb P) $ und $ \mathcal G\subset\mathcal F $ eine Unter-$ \sigma $-Algebra. Eine Zufallsvariable $ \tilde X:\Omega\to\mathbb R $ heißt \underline{bedingte Erwartung} von $ X $ gegeben $ \mathcal G $, wenn gilt:
+\begin{itemize}
+\item[i)] $ \tilde X \ \mathcal G $-messbar
+\item[ii)] $ \forall \ A\in\mathcal G: E[X\mathbbm 1_{A}]=E[\tilde X\mathbbm 1_{A}] $
+\end{itemize}
+Wir schreiben $ \tilde X=E_{\mathbb P}[X|\mathcal G] $
+\end{Def}
+\begin{rem}
+$ \tilde X $ ist nur $ \mathbb P $-f.s. eindeutig bestimmt. Aussagen über die bedingte Erwartung sollten deshalb stets das Attribut "f.s."' tragen.
+\end{rem}
+\begin{lem}[Eigenschaften der bedingten Erwartung]
+\begin{enumerate} 
+\item[a)] $ E_{\mathbb P}[X|\mathcal G] $ integrierbar
+\item[b)] $ X\geq 0 \Longrightarrow E_{\mathbb P}[X|\mathcal G]\geq 0 \hspace*{1.5cm}\mathbb P$-f.s.
+\item[c)] $ X \ \mathcal G $-messbar $ \Longrightarrow E_{\mathbb P}[X|\mathcal G]=X \hspace*{1.5cm}\mathbb P$-f.s.
+\item[d)] $ E[X|\{\emptyset,\Omega\}]=E_{\mathbb P}[X] \hspace*{1.5cm}\mathbb{P}$-f.s.
+\item[e)] $ E_{\mathbb P}[E_{\mathbb P}[X|\mathcal G]]=E_{\mathbb P}[X] \hspace*{1.5cm}\mathbb P$-f.s.
+\item[f)] $ \mathcal A\subset\mathcal G $ weitere Unter-$ \sigma $-Algebra von $ \mathcal F $: $ E_{\mathbb P}[E_{\mathbb P}[X|\mathcal G]|\mathcal A]=E_{\mathbb P}[X|\mathcal A] \hspace*{0.5cm}\mathbb{P} $-f.s.
+\begin{hwork}[Beweis]
+\end{hwork}
+\end{enumerate}
+\end{lem}
+\begin{ex}[Wichtig!]
+$ \mathcal G=\sigma(A_{1},\hdots,A_{n}), A_{i}\cap A_{j}=\emptyset, \mathbb{P}(A_{i})>0,\Omega=\bigcup\limits_{i=1}^{n}A_{i} $, dann gilt:
+\[ E_{\mathbb P}[X|\mathcal G]=\sum\limits_{i=1}^{n}\frac{E_{\mathbb P}[X_{i}A_{i}]}{\mathbb P(A_{i})}\mathbbm 1_{A_{i}}=\sum\limits_{i=1}^{n}E_{\mathbb P}[X|A_{i}]\mathbbm 1_{A_{i}}=\sum\limits_{i=1}^{n}E_{\mathbb P[\cdot|A_{i}]}[X]\mathbbm 1_{A_{i}} \]
+\underline{Spezialfall:} Sei $ S $ eine Zufallsvariable, die nur endlich viele Werte $ s_{1},\hdots,s_{n} $ mit positiven Wahrscheinlichkeiten annimmt, dann ist $ \sigma(S)=\sigma(\{S=s_{1}\},\hdots,\{S=s_{n}\}) $ von der obigen Gestalt.
+\end{ex}
+\begin{lem}[Weitere Eigenschaften]
+\begin{enumerate}
+\item[1)] $E_{\mathbb P}[\cdot|\mathcal G]:\mathcal L^{1}(\Omega,\mathcal F,\mathbb P)\to(\Omega, \overset{\mathcal G}{\mathcal F},\mathbb P) $
+\end{enumerate}
+\end{lem}
